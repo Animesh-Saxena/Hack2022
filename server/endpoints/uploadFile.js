@@ -44,4 +44,4 @@ function uploadFile(app) {
     });
 }
 
-export default uploadFile;
+module.exports = uploadFile;
