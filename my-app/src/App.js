@@ -13,8 +13,14 @@ function App() {
     <NavbarGroup align={Alignment.LEFT}>
         <NavbarHeading>Lectures are Boring</NavbarHeading>
         <NavbarDivider />
-        <Button className={Classes.MINIMAL} icon="home" text="Transcribe" href={"/"}/>
-        <Button className={Classes.MINIMAL} icon="document" text="Summarize" href={"/summarize"}/>
+        <Button className={Classes.MINIMAL} icon="home" text="Transcribe" onClick={(e) => {
+            e.preventDefault();
+            window.location.href='/';
+        }}/>
+        <Button className={Classes.MINIMAL} icon="document" text="Summarize" onClick={(e) => {
+            e.preventDefault();
+            window.location.href='/summarize';
+        }}/>
     </NavbarGroup>
   </Navbar>
 

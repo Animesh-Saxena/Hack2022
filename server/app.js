@@ -23,7 +23,8 @@ app.use(express.json({
 const endpoints = [
     require('./endpoints/uploadFile'),
     // require('./endpoints/transcribe'),
-    // require('./endpoints/summarize'),
+    require('./endpoints/summarizeText'),
+    require('./endpoints/caption'),
 ];
 
 for(const endpoint of endpoints){

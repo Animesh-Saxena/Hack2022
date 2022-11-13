@@ -33,3 +33,4 @@ yarn-error.log*
 /application_default_credentials.json
 
 /uploads
+/package-lock.json
