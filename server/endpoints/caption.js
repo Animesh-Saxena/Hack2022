@@ -1,7 +1,7 @@
 const {PythonShell} = require('python-shell');
 
 function caption(app){
-    app.get("/caption",
+    app.post("/caption",
         (req, res) => {
             let options = {
                 mode: 'text',
@@ -12,9 +12,12 @@ function caption(app){
             };
 
             PythonShell.run('caption.py', options, function (err, results) {
-                if (err) throw res.status(500);
+                if (err) {
+                    console.log(err);
+                    throw res.status(500);
+                }
                 // results is an array consisting of messages collected during execution
-                res.status(200).json({result: results[results.length - 1]});
+                res.status(200).json({result: results.join(' ')});
             });
         })
 }
