@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = 8080;
 const path = require("path");
 const { Storage } = require("@google-cloud/storage");
 const Multer = require("multer");
@@ -10,7 +9,7 @@ app.use(express.static(src));
 const multer = Multer({
     storage: Multer.memoryStorage(),
     limits: {
-        fileSize: 5 * 1024 * 1024, // No larger than 5mb, change as you need
+        fileSize: 500 * 1024 * 1024, // No larger than 5mb, change as you need
     },
 });
 
