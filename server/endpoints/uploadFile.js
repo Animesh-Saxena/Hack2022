@@ -24,8 +24,11 @@ const bucket = storage.bucket("lecture-summarizer"); // Get this from Google Clo
 
 function uploadFile(app) {
 // Streams file upload to Google Storage
-    app.post("/upload", multer.single("filename"), (req, res) => {
-        console.log("Made it /upload");
+    app.get("/uploadFile", (req, res) => {
+        console.log('bruh');
+    });
+    app.post("/uploadFile", multer.single("filename"), (req, res) => {
+        console.log("Made it /uploadFile");
         try {
             if (req.file) {
                 console.log("File found, trying to upload...");

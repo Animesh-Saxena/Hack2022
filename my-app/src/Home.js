@@ -20,7 +20,7 @@ function Home() {
         // Build the form data - You can add other input values to this i.e descriptions, make sure img is appended last
         let formData = new FormData();
         formData.append("filename", newFile);
-        fetch("/UploadFile", {
+        fetch("/uploadFile", {
             method: "POST",
             body: formData,
         })
