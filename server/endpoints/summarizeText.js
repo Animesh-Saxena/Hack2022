@@ -12,8 +12,8 @@ const MAX_RESPONSE = 256;
 const INTERVAL = 0.9;
 const MAX_TOKENS = INTERVAL * (MAX_REQUEST - MAX_RESPONSE - 6);
 
-function summarize(app) {
-    app.get('/summarize',
+function summarizeText(app) {
+    app.post('/summarizeText',
         async (req, res) => {
         console.log(req.body);
         let splits = split(req.body.text);
@@ -47,4 +47,4 @@ function generatePrompt(text) {
   Summarize the above lecture as notes:`;
 }
 
-module.exports = summarize;
+module.exports = summarizeText;
