@@ -76,7 +76,7 @@ function uploadFile(app) {
                             console.log('Audio file: ' + file);
                             console.log("File found, trying to upload...");
                             bucket.upload('./uploads/outputs2.raw', {destination: 'output.raw'})
-                            .then(async (res) => {
+                            .then(async (resp) => {
                                 const [operation] = await client.longRunningRecognize(request);
                                 // Get a Promise representation of the final result of the job
                                 const [response] = await operation.promise();
@@ -84,8 +84,9 @@ function uploadFile(app) {
                                 .map(result => result.alternatives[0].transcript)
                                 .join('\n');
                                 console.log(`Transcription: ${transcription}`);
+                                res.status(200).json({'body':transcription})
                             })
-                            .then(() => {})
+                            .then((res) => res)
                             .catch((error) => console.log(error))
                         }
                             else{

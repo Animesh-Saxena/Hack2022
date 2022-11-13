@@ -16,3 +16,19 @@
   width: 50%;
   align-self: center;
 }
+
+.displayFlex{
+  display:flex;
+  padding: 10px;
+  flex-direction: column
+}
+
+.row{
+  width: 100%;
+}
+
+.textarea {
+  height:100%;
+  width: 90%;
+  padding: 40px;
+}

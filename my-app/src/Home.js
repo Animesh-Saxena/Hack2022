@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react'
-import {Route} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { Alignment, Text, Classes, input, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, FormGroup, Button } from "@blueprintjs/core";
 
-function Home() {
+function Home(props) {
   const [file, setFile] = useState(null);
+  const navigate = useNavigate()
   const changeHandler = (e) => {
     e.preventDefault();
 	setFile(e.target.files[0]);
@@ -25,8 +26,9 @@ function Home() {
             method: "POST",
             body: formData,
         })
-        .then((res) => res.text())
-        .then((res) => console.log(res));
+        .then((res) => res.json())
+        .then((res) => {props.setText(res['body']);navigate("/summarize");})
+        .catch((error) => console.log(error))
     }
   }
 

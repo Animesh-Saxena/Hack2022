@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {Button, input} from "@blueprintjs/core";
+import './App.css';
 
-function Summarize() {
-    const [text, setText] = useState(null);
+function Summarize(props) {
+    const [text, setText] = useState(props?.text);
     const [results, setResults] = useState(null);
     const changeHandler = (e) => {
         e.preventDefault();
@@ -17,25 +18,24 @@ function Summarize() {
                     "text": text
                 }),
             })
-                .then((res) => res.text())
-                .then((res) => {console.log(res); setResults(res.result)});
+                .then((res) => res.json())
+                .then((res) => {console.log(res["result"]); setResults(res['result'])});
         }
     }
 
     return (
-        <div className="App">
-            <div className='skeleton'>
-        <span className='centerAndHalf'>
-                Text to Summarize:<textarea
-                                    rows={10}
-
-                                    cols={150}
-                                    onChange={changeHandler}
-        />
-        </span>
-
+        <div className='displayFlex'>
+            <div className='row'>
+            <h2>Text to Summarize:</h2>
             </div>
-            <div className='nose'>
+            <div>
+                <textarea
+                    value={text}
+                    onChange={changeHandler}
+                    className={'textarea'}
+                />
+            </div>
+            <div >
                 <Button onClick={handleSummarize}>Summarize</Button>
             </div>
             <div>{results}</div>
