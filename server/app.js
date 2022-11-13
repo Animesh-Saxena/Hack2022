@@ -22,7 +22,6 @@ app.use(express.json({
 
 const endpoints = [
     require('./endpoints/uploadFile'),
-    // require('./endpoints/transcribe'),
     require('./endpoints/summarizeText'),
     require('./endpoints/caption'),
 ];

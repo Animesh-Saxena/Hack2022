@@ -86,7 +86,7 @@ function uploadFile(app) {
                                 console.log(`Transcription: ${transcription}`);
                                 res.status(200).json({'body':transcription})
                             })
-                            .then((res) => res)
+                            .then((res) => deleteUploads())
                             .catch((error) => console.log(error))
                         }
                             else{
@@ -103,6 +103,24 @@ function uploadFile(app) {
             res.status(500).send(error);
         }
     });
+}
+
+function deleteUploads(){
+    const fs = require("fs");
+    const path = require("path");
+
+    const directory = "./uploads";
+
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+
+        for (const file of files) {
+            fs.unlink(path.join(directory, file), (err) => {
+                if (err) throw err;
+            });
+        }
+    });
+
 }
 
 module.exports = uploadFile;
