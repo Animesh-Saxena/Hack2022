@@ -20,9 +20,10 @@ function Home() {
   const handleTranscribe = (e) => {
     if(file){
         let localfile = file;
+        console.log(file)
         // Create new file so we can rename the file
-        let blob = localfile.slice(0, localfile.size, "image/jpeg");
-        let newFile = new File([blob], `post.jpeg`, { type: "image/jpeg" });
+        let blob = localfile.slice(0, localfile.size, localfile.type);
+        let newFile = new File([blob], localfile.name, { type: localfile.type });
         // Build the form data - You can add other input values to this i.e descriptions, make sure img is appended last
         let formData = new FormData();
         formData.append("filename", newFile);
