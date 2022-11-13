@@ -2,8 +2,8 @@ import sys
 import subprocess
 
 # implement pip as a subprocess:
-subprocess.check_call([sys.executable, '-m', 'pip', 'install',
-'youtube_transcript_api'])
+# subprocess.check_call([sys.executable, '-m', 'pip', 'install',
+# 'youtube_transcript_api'])
 
 from youtube_transcript_api import YouTubeTranscriptApi
 

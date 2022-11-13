@@ -6,10 +6,16 @@ import { Alignment, Text, Classes, input, Navbar, NavbarGroup, NavbarHeading, Na
 
 function Home() {
   const [file, setFile] = useState(null);
+    const [text, setText] = useState(null);
   const changeHandler = (e) => {
     e.preventDefault();
 	setFile(e.target.files[0]);
 	};
+    const changeTextHandler = (e) => {
+        e.preventDefault();
+        setText(e.target.value);
+        validateYouTubeUrl(text); // can you have some variable that displays a warning if this doesn't return true
+    };
 
   const handleTranscribe = (e) => {
     if(file){
@@ -25,8 +31,23 @@ function Home() {
             body: formData,
         })
         .then((res) => res.text())
-        .then((res) => console.log(res));
-    }
+        .then((res) => console.log(res)); // take this to the next page
+    } else if (validateYouTubeUrl(text)) {
+        let start = text.indexOf('=') + 1;
+        let end = text.indexOf('&');
+        if (end === -1){
+            end = text.length
+        }
+        console.log(text.slice(start, end));
+        fetch("/caption", {
+            method: "POST",
+            body: JSON.stringify({
+                "id": text.slice(start, end)
+            }),
+        })
+            .then((res) => res.text())
+            .then((res) => console.log(res)); // take this to the next page, the result is in 'result' field
+      }
   }
 
   return (
@@ -34,7 +55,7 @@ function Home() {
       <div className='skeleton'>
         <span className='centerAndHalf'>
                 Paste a Link: 
-                <input type="text"  />
+                <input type="text"  onChange={changeTextHandler}/>
         </span>
         <span className='centerAndHalf'>
             Choose:
@@ -46,6 +67,15 @@ function Home() {
       </div>
     </div>
   );
+}
+
+function validateYouTubeUrl(text)
+{
+    if (text !== undefined || text !== '') {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+        const match = text.match(regExp);
+        return (match && match[2].length === 11)
+    }
 }
 
 export default Home;
