@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config();
-console.log(process.env);
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -38,7 +37,7 @@ function split(text){
     const interval_length = Math.ceil(tokens.length/intervals);
     let result = [];
     for (let i = 0; i < intervals; i++){
-        result.push(tokens.slice(i*interval_length, Math.min((i+1)*interval_length, tokens.length)).join());
+        result.push(tokens.slice(i*interval_length, Math.min((i+1)*interval_length, tokens.length)).join(' '));
     }
     return result
 }
