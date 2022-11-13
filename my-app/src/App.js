@@ -30,6 +30,9 @@ function App() {
         <Route exact path="/" element={<Home setText={setText}/>} />
       <Route exact path="/summarize" element={<Summarize text={text}/>} />
     </Routes>
+        <div className={Classes.TEXT_SMALL} style={{color: "dimgrey", paddingLeft: 10}}>
+            Powered by <a href={'https://cloud.google.com/'} style={{color: "dimgrey"}}>Google Cloud</a> & <a href={'https://openai.com/'} style={{color: "dimgrey"}}>OpenAI's GPT-3</a>
+        </div>
     </div>
   );
 }

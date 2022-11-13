@@ -64,11 +64,11 @@ function Home(props) {
     return (<div className="App">
     <div className='skeleton'>
       <span className='centerAndHalf'>
-              Paste a Link: 
+              Paste a YouTube link:
               <input type="text"  onChange={changeTextHandler}/>
       </span>
       <span className='centerAndHalf'>
-          Choose:
+          Upload a video:
           <input type="file" onChange={changeHandler} />
       </span>
     </div>
