@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react'
 import {Routes, Route, useNavigate} from 'react-router-dom'
@@ -13,7 +13,7 @@ function App() {
     <div>      
     <Navbar>
     <NavbarGroup align={Alignment.LEFT}>
-        <NavbarHeading>Lectures are Boring</NavbarHeading>
+        <NavbarHeading>Lecture Summarizer</NavbarHeading><img src={logo} height={50} width={50}/>
         <NavbarDivider />
         <Button className={Classes.MINIMAL} icon="home" text="Transcribe" onClick={(e) => {
           e.preventDefault();

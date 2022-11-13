@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react'
 import {useNavigate} from 'react-router-dom'
@@ -48,9 +47,9 @@ function Home(props) {
                 "id": text.slice(start, end)
             }),
         })
-            .then((res) => res.text())
-            .then((res) => console.log(res)); // take this to the next page, the result is in 'result' field
-      }
+            .then((res) => res.json())
+            .then((res) => {props.setText(res.result);navigate("/summarize");})
+            .catch((error) => console.log(error))      }
   }
 
   return (

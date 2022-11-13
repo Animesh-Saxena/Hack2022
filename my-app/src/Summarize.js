@@ -32,13 +32,22 @@ function Summarize(props) {
                 <textarea
                     value={text}
                     onChange={changeHandler}
+                    rows = {10}
                     className={'textarea'}
                 />
             </div>
             <div >
-                <Button onClick={handleSummarize}>Summarize</Button>
+                <br/>
+                <Button onClick={handleSummarize}>Summarize!</Button>
             </div>
-            <div>{results}</div>
+            <div className='row'>
+                <h2>Summarized Notes:</h2>
+            </div>
+            <div><textarea readOnly
+                value={results}
+                           rows = {10}
+                className={'textarea'}
+            /></div>
         </div>
     );
 }
