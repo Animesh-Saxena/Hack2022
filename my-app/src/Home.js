@@ -3,9 +3,11 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Alignment, Text, Classes, input, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, FormGroup, Button } from "@blueprintjs/core";
+import loading from './IncomparableConventionalIchneumonfly-size_restricted.gif'
 
 function Home(props) {
   const [file, setFile] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
     const [text, setText] = useState(null);
   const changeHandler = (e) => {
@@ -28,13 +30,14 @@ function Home(props) {
         // Build the form data - You can add other input values to this i.e descriptions, make sure img is appended last
         let formData = new FormData();
         formData.append("filename", newFile);
+        setIsOpen(true);
         fetch("/uploadFile", {
             method: "POST",
             body: formData,
         })
         .then((res) => res.json())
-        .then((res) => {props.setText(res['body']);navigate("/summarize");})
-        .catch((error) => console.log(error))
+        .then((res) => {setIsOpen(false);props.setText(res['body']);navigate("/summarize");})
+        .catch((error) => {setIsOpen(false);console.log(error)})
     } else if (validateYouTubeUrl(text)) {
         let start = text.indexOf('=') + 1;
         let end = text.indexOf('&');
@@ -53,23 +56,28 @@ function Home(props) {
       }
   }
 
-  return (
-    <div className="App">
-      <div className='skeleton'>
-        <span className='centerAndHalf'>
-                Paste a Link: 
-                <input type="text"  onChange={changeTextHandler}/>
-        </span>
-        <span className='centerAndHalf'>
-            Choose:
-            <input type="file" onChange={changeHandler} />
-        </span>
-      </div>
-      <div className='nose'>
-        <Button onClick={handleTranscribe}>Transcribe</Button>
-      </div>
+  if(isOpen){
+    return (<div className='App'>
+        <img src={loading}  />
+        </div>);
+  }
+  else{
+    return (<div className="App">
+    <div className='skeleton'>
+      <span className='centerAndHalf'>
+              Paste a Link: 
+              <input type="text"  onChange={changeTextHandler}/>
+      </span>
+      <span className='centerAndHalf'>
+          Choose:
+          <input type="file" onChange={changeHandler} />
+      </span>
     </div>
-  );
+    <div className='nose'>
+      <Button onClick={handleTranscribe}>Transcribe</Button>
+    </div>
+  </div>)
+  }
 }
 
 function validateYouTubeUrl(text)
