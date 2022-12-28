@@ -9,7 +9,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 const MAX_REQUEST = 2048;
 const MAX_RESPONSE = 256;
-const INTERVAL = 0.9;
+const INTERVAL = 0.85;
 const MAX_TOKENS = INTERVAL * (MAX_REQUEST - MAX_RESPONSE - 6);
 
 function summarizeText(app) {

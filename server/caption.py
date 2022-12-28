@@ -8,4 +8,4 @@ import subprocess
 from youtube_transcript_api import YouTubeTranscriptApi
 
 captions = YouTubeTranscriptApi.get_transcript(sys.argv[1])
-print(" ".join(i['text'] for i in captions))
+print(" ".join(i['text'].replace(u"\u266a", "") for i in captions))
